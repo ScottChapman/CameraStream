@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "getlocation-1218",
+  "private_key_id": "946df28a7de854413a4140b252977015a33da9bd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDoD3xQhUnIIVXH\nse20HcsVG4Q4e37KubgpBMTBzxrXcUQAA4mIeOwL0FN2p0+woCx12A6pWkkt/C2M\nrdyLjVWdgUaBel+xm5HRN8yiLQTcAc+v8Iq7SQ6l7AdtI2mQ86p7gGYCiPCW98wS\n0a5Bm84pdcjoVFYS1IRuGH7XLnccHdoXHlIPfy/VTaptkzhhEJTtNEONKGuQG+IM\nregHufjlsyiOu07Mj1b7dQ8OHdL/pHNQrhJHbwzbvzJ3nYaQ99mfEqJPGn+EuJEC\nYNi5hOg++1coUKw0ouTlmSYVDwIwK7Gl6brUfuGa777eFf7YV1Nuog/oZWbto1wy\ns7NGJgd/AgMBAAECggEABXB+JqRb1zaSJv+l2uUgjP/w801Qaq+8FYNjRJ22UIV6\n+rsafq9C7StMFt8TcEhDh9xGyl5vklsztXVKfZ+UTwBS5uxiO4IHgs1u3QBMJFy1\n1wxphrv5fWx7vL7/QE1jL3OSMI4FgaxmRVdSi9Ql8B/Zfo9M2IfQYNpEeDEXy/oL\nDnFXrXPC2NHjEmIsHgvIuTebnAo+duKBk2TQWp+JT3ybGdsGkJdB8D/61GKtUKzb\nQFheyeq3zlc6WBvY+ryG7DqNd3UtBJ/iJTvze6ws+38+sPcZb/hsyn3J/r/ZyVOF\nEI+1wxKCwMF28xKy8No8YMVr+QzhUOULPFNfyERvmQKBgQD62I4tLP1Gyo/JJW0y\nK2ja7WD4jr15sfLs692syEtxtszqfp51AAgfPHJO563e5NdzNkRd6Xa+Hns4T0vA\nc5xWURjYVPKmDxq0GpIUKX8mf598QbS3BMHecAs5UIFjWHQWaJV1vGzbJyTMO8tP\nIwdgjhrLCVHcv/CJ6lwDzP7SlwKBgQDs1B6GdseFAvQdSSnNLewlfMjLkPtYVdGO\nkpjj/W3tlbxJtP2Iu5ZgvY1jklA6pkHONsAsQCqgRreZuRPLLvcxE5HLpFXui8UC\nE4lu/uaRVcbeHY4H833oufNG+UufJX221Ytup1ChgI+H+PrU49xzXKjO3G84ALLw\nRfafVx7XWQKBgQDIebQ/RJpzLkZ18pRvqSPW/Coo3CNwFBja4rK6eSVaj0b8Dg/j\n4A+drziH+T8LSYcrC+7dw01kKoY9/ZnECGGk1pFtq451ytKDqEyhEn0NLqgurXCZ\naJLsjE1cFAwkcrfshM8WVm4FRCZzl0IoUA2ATHH7XMpxC3FZN9UsMHRjpwKBgQCG\nINis9Qao+XRCRdaL4w9UZ+jdCd6gN/J4WeSHc1fX8C70W7Ifx4YygghatVoE7XZl\nkTKjnS/HGGYRhPWF5LKRM/ElsYwNj1FjjKcQmwMAmuEHmRuAu1G7Bd2Xe8dtefFK\nJIVUhSQwY7xmmQeOnQKUv4zHo6bFw/eUBzvXIKNR+QKBgEdYvUOC7aSbEqcLWc3Z\n1dnNGZ+yACBVT3UbppUBsLrPwoc5WIWwg+tr8wIY2NROOz6vYV90+eU4wrvpmC5E\nggY3pGBcfLU7MElVxqGAfMw0kAsJmM59yUlT4vcCr9g3fYcReHYcVYmt4MYtJDlD\nKST//EJWrgTojbWW2X02xKW/\n-----END PRIVATE KEY-----\n",
+  "client_email": "mycamera@getlocation-1218.iam.gserviceaccount.com",
+  "client_id": "109964152138414859987",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mycamera%40getlocation-1218.iam.gserviceaccount.com"
+}
