@@ -16,17 +16,19 @@ const Player = new Speaker({
   sampleRate: 16000
 })
 
-let params = {
-    'Text': 'Hi, my name is Homer J Simpson.',
-    'OutputFormat': 'pcm',
-    'VoiceId': 'Kimberly'
-}
 
-Polly.synthesizeSpeech(params, (err, data) => {
-    if (err) {
-        console.log(err.code)
-    } else if (data) {
-	console.log("Got speech back");
+function speak(text) {
+  let params = {
+      Text: text,
+      OutputFormat: 'pcm',
+      VoiceId: 'Kimberly'
+  }
+  return new Promise(function(resolve,reject) {
+    Polly.synthesizeSpeech(params, (err, data) => {
+      if (err)
+        reject(err);
+      if (data) {
+      	console.log("Got speech back");
         if (data.AudioStream instanceof Buffer) {
             // Initiate the source
             var bufferStream = new Stream.PassThrough()
@@ -34,6 +36,13 @@ Polly.synthesizeSpeech(params, (err, data) => {
             bufferStream.end(data.AudioStream)
             // Pipe into Player
             bufferStream.pipe(Player)
+            resolve();
         }
-    }
-})
+      }
+    })
+  })
+}
+
+speak("Hello, my name is Marge Simpson").catch(err => {
+  console.dir(err);
+});
