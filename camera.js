@@ -4,7 +4,9 @@ var exec = require('child_process').exec;
 var preview;
 var photoDisplay;
 var _ = require('lodash');
-var image = "./images/raw_image.jpg";
+var streamFile = "./images/stream_image.jpg";
+var rawImageFile = "./images/raw_image.jpg";
+var imageFile = "./images/image.jpg";
 
 var button1 = new Gpio(20, {
     mode: Gpio.INPUT,
@@ -60,7 +62,7 @@ button4.on('interrupt', _.debounce(function (level) {
 function startStreaming() {
 	stopPhotoDisplay();
 	if (!preview || preview.killed) {
-	  var args = ["-w", "1024", "-h", "600", "-vs", "-t", "999999999", "-tl", "100"];
+	  var args = ["-w", "1024", "-h", "600", "-o", streamFile, "-vs", "-t", "999999999", "-tl", "100"];
 	  console.log("Starting preview");
 	  preview = spawn('raspistill', args);
 	}
@@ -68,7 +70,7 @@ function startStreaming() {
 
 function startPhotoDisplay() {
 	if (!photoDisplay || photoDisplay.killed) {
-	  var args = ["-T", "1", "-a", image];
+	  var args = ["-T", "1", "-a", rawImageFile];
 	  console.log("Starting photoDisplay");
 	  photoDisplay = spawn('fbi', args);
 	}
@@ -88,12 +90,9 @@ function stopPhotoDisplay() {
 
 function takePhoto() {
 	stopStreaming();
-	if (!preview || preview.killed) {
-	  console.log("Taking Photo!");
-	  exec('raspistill -w 1024 -h 600 -vs -f -o ' + image, (error,stdout,stderr) => {
-			console.log("Photo taken");
-			startPhotoDisplay();
-		});
+  fs.copy(streamFile,rawImageFile)
+		.then(() => console.log("Photo Taken!"))
+		.catch(err => console.dir(err))
 	}
 }
 
