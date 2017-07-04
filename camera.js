@@ -58,6 +58,7 @@ button4.on('interrupt', _.debounce(function (level) {
 },1000, { leading: true }));
 
 function startStreaming() {
+	stopPhotoDisplay();
 	if (!preview || preview.killed) {
 	  var args = ["-w", "1024", "-h", "600", "-vs", "-t", "999999999", "-tl", "100"];
 	  console.log("Starting preview");
@@ -75,27 +76,51 @@ function startPhotoDisplay() {
 
 function stopPhotoDisplay() {
   console.log("Stopping PhotoDisplay...");
-  if (!photoDisplay.killed) {
+  if (photoDisplay && !photoDisplay.killed) {
   	console.log("Killing photoDisplay");
-  	photoDisplay.kill();
+  	// photoDisplay.stdin.pause();
+  	// photoDisplay.kill('SIGKILL');
+	exec('killall fbi');
+	photoDisplay = null;
+	console.dir(photoDisplay);
   }
 }
 
 function takePhoto() {
 	stopStreaming();
 	if (!preview || preview.killed) {
-	  var args = ["-w", "1024", "-h", "600", "-vs", "-o", image, "-f"];
-	  console.log("Starting preview");
+	  console.log("Taking Photo!");
 	  exec('raspistill -w 1024 -h 600 -vs -f -o ' + image, (error,stdout,stderr) => {
 			console.log("Photo taken");
+			startPhotoDisplay();
 		});
 	}
 }
 
 function stopStreaming() {
   console.log("Stopping preview...");
-  if (!preview.killed) {
+  if (preview && !preview.killed) {
   	console.log("Killing preview");
+	preview.stdin.pause();
   	preview.kill();
   }
 }
+
+process.stdin.resume();//so the program will not close instantly
+
+function exitHandler(options, err) {
+    if (options.cleanup) console.log('clean');
+    if (err) console.log(err.stack);
+    stopStreaming();
+    stopPhotoDisplay();
+    if (options.exit) process.exit();
+}
+
+//do something when app is closing
+process.on('exit', exitHandler.bind(null,{cleanup:true}));
+
+//catches ctrl+c event
+process.on('SIGINT', exitHandler.bind(null, {exit:true}));
+
+//catches uncaught exceptions
+process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
