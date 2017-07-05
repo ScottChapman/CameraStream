@@ -1,9 +1,10 @@
 var Gpio = require('pigpio').Gpio;
 var spawn = require('child_process').spawn;
 var exec = require('child_process').exec;
+var _ = require('lodash');
+var analyze = require('analyze');
 var preview;
 var photoDisplay;
-var _ = require('lodash');
 var streamFile = "./images/stream_image.jpg";
 var imageFile = "./images/image.jpg";
 
@@ -89,7 +90,10 @@ function stopPhotoDisplay() {
 
 function takePhoto() {
 	stopStreaming();
-	startPhotoDisplay();
+  analyze.AnalyzeImage(streamFile).then(info => {
+  	startPhotoDisplay();
+    console.dir(info);
+  })
 }
 
 function stopStreaming() {
