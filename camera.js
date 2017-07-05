@@ -5,7 +5,6 @@ var preview;
 var photoDisplay;
 var _ = require('lodash');
 var streamFile = "./images/stream_image.jpg";
-var rawImageFile = "./images/raw_image.jpg";
 var imageFile = "./images/image.jpg";
 
 var button1 = new Gpio(20, {
@@ -62,7 +61,7 @@ button4.on('interrupt', _.debounce(function (level) {
 function startStreaming() {
 	stopPhotoDisplay();
 	if (!preview || preview.killed) {
-	  var args = ["-w", "1024", "-h", "600", "-o", streamFile, "-vs", "-t", "999999999", "-tl", "100"];
+	  var args = ["-w", "1024", "-h", "600", "-o", streamFile, "-t", "999999999", "-tl", "0"];
 	  console.log("Starting preview");
 	  preview = spawn('raspistill', args);
 	}
@@ -70,7 +69,7 @@ function startStreaming() {
 
 function startPhotoDisplay() {
 	if (!photoDisplay || photoDisplay.killed) {
-	  var args = ["-T", "1", "-a", rawImageFile];
+	  var args = ["-T", "1", "-a", streamFile];
 	  console.log("Starting photoDisplay");
 	  photoDisplay = spawn('fbi', args);
 	}
@@ -90,10 +89,7 @@ function stopPhotoDisplay() {
 
 function takePhoto() {
 	stopStreaming();
-  fs.copy(streamFile,rawImageFile)
-		.then(() => console.log("Photo Taken!"))
-		.catch(err => console.dir(err))
-	}
+	startPhotoDisplay();
 }
 
 function stopStreaming() {
