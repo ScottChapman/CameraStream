@@ -53,6 +53,10 @@ function emotions(info,callback) {
 	});
 }
 
+/*
 emotions(JSON.parse(fs.readFileSync('./faces.json'))).then(emotions => {
 	console.dir(emotions);
 });
+*/
+
+module.exports.detect = emotions;

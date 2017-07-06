@@ -2,7 +2,9 @@ var Gpio = require('pigpio').Gpio;
 var spawn = require('child_process').spawn;
 var exec = require('child_process').exec;
 var _ = require('lodash');
-var analyze = require('analyze');
+var analyze = require('./analyze.js');
+var emotion = require('./emotion.js');
+var speaker = require('./speaker.js');
 var preview;
 var photoDisplay;
 var streamFile = "./images/stream_image.jpg";
@@ -90,9 +92,13 @@ function stopPhotoDisplay() {
 
 function takePhoto() {
 	stopStreaming();
-  analyze.AnalyzeImage(streamFile).then(info => {
-  	startPhotoDisplay();
-    console.dir(info);
+	analyze.AnalyzeImage(streamFile).then(info => {
+		startPhotoDisplay();
+		console.dir(info);
+		emotion.detect(info).then(emotions => {
+			speaker.speak(emotions.text);
+			console.dir(emotions);
+		});
   })
 }
 

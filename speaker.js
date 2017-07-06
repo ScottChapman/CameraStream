@@ -43,6 +43,11 @@ function speak(text) {
   })
 }
 
-speak("Hello, my name is Marge Simpson").catch(err => {
+/*
+// speak("Hello, my name is Marge Simpson").catch(err => {
+speak("the first person looks undefined").catch(err => {
   console.dir(err);
 });
+*/
+
+module.exports.speak = speak;

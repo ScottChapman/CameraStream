@@ -28,6 +28,7 @@ function AnalyzeImage(imageFile,callback) {
 	})
 }
 
+/*
 console.log("Checking with google machine...");
 AnalyzeImage('./kittens.jpg').then(info => {
 	console.log("Got something back!");
@@ -35,3 +36,6 @@ AnalyzeImage('./kittens.jpg').then(info => {
 }).catch(err => {
 	console.dir(err);
 })
+*/
+
+module.exports.AnalyzeImage = AnalyzeImage;
