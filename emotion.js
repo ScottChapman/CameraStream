@@ -40,12 +40,18 @@ function emotions(info,callback) {
 			_.keys(emotionMap).forEach(emotion => {
 				if (face[emotion] && face[emotion + 'Likelihood'] >= 3) emotions.push(emotionMap[emotion])
 			})
-			result.faces.push({
-				confidence: face.confidence,
-				text: "the " + numberToWords.toWordsOrdinal(count) + " person looks " + emotions[0],
-				emotions: emotions,
-				headwear: face.headwear
-			})
+			var faceEmotion = {
+					confidence: face.confidence,
+					emotions: emotions,
+					headwear: face.headwear
+				};
+			if (emotions.length > 0) {
+				faceEmotion.text = "the " + numberToWords.toWordsOrdinal(count) + " person looks " + emotions[0];
+			}
+			else {
+				faceEmotion.text = "I can't tell what the " + numberToWords.toWordsOrdinal(count) + " person is feeling";
+			}
+			result.faces.push(faceEmotion);
 			count++;
 		})
 		result.text = humanize.oxford(_.map(result.faces,'text'));
