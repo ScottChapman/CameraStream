@@ -5,6 +5,7 @@ var _ = require('lodash');
 var analyze = require('./analyze.js');
 var emotion = require('./emotion.js');
 var speaker = require('./speaker.js');
+var catDetector = require('./detectCats.js');
 var preview;
 var photoDisplay;
 var streamFile = "./images/stream_image.jpg";
@@ -32,7 +33,7 @@ var button2 = new Gpio(12, {
 button2.on('interrupt', _.debounce(function (level) {
 	if (level === 0) {
 		console.log("GPIO12 Pressed!");
-		takePhoto();
+		checkForFaces();
 	}
 },1000, { leading: true }));
 
@@ -45,6 +46,7 @@ var button3 = new Gpio(16, {
 button3.on('interrupt', _.debounce(function (level) {
 	if (level === 0) {
 		console.log("GPIO16 Pressed!");
+		checkForCats();
 	}
 },1000, { leading: true }));
 
@@ -90,15 +92,33 @@ function stopPhotoDisplay() {
   }
 }
 
-function takePhoto() {
+function checkForFaces() {
 	stopStreaming();
-	analyze.AnalyzeImage(streamFile).then(info => {
-		startPhotoDisplay();
-		console.dir(info);
-		emotion.detect(info).then(emotions => {
-			speaker.speak(emotions.text);
-			console.dir(emotions);
-		});
+  speaker.speak("Hmmm... Let me see what the Google Machine thinks...").then(function() {
+  	analyze.AnalyzeImage(streamFile).then(info => {
+  		startPhotoDisplay();
+  		console.dir(info);
+  		emotion.detect(info).then(emotions => {
+  			speaker.speak(emotions.text);
+  			console.dir(emotions);
+  		});
+    })
+  })
+}
+
+function checkForCats() {
+	stopStreaming();
+  speaker.speak("Hmmm... Let me see if the Google Machine can find any cats...").then(function() {
+  	analyze.AnalyzeImage(streamFile).then(info => {
+  		startPhotoDisplay();
+  		console.dir(info);
+  		catDetector.detect(info).then(cats => {
+        if (cats)
+    			speaker.speak("Hey! Google sees cats!");
+        else
+    			speaker.speak("Well, Google didn't find any cats...");
+  		});
+    })
   })
 }
 
