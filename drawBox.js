@@ -23,6 +23,7 @@ function drawFaceBoxes(info,imageIn,imageOut) {
 	})
 }
 
+/*
 drawFaceBoxes(JSON.parse(fs.readFileSync('./faces.json')), './faces.jpg', './facesBoxed.jpg').then(function(count) {
 	console.log("Found: " + count + " faces!");
 });
@@ -30,3 +31,6 @@ drawFaceBoxes(JSON.parse(fs.readFileSync('./faces.json')), './faces.jpg', './fac
 drawFaceBoxes(JSON.parse(fs.readFileSync('./kittens.json')), './kittens.jpg', './kittensBoxed.jpg').then(function(err,count) {
 	console.log("Found: " + count + " faces!");
 });
+*/
+
+module.exports.drawFaceBoxes = drawFaceBoxes;
