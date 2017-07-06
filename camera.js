@@ -5,6 +5,7 @@ var _ = require('lodash');
 var analyze = require('./analyze.js');
 var emotion = require('./emotion.js');
 var speaker = require('./speaker.js');
+var faceBoxes = require('./drawBox.js');
 var catDetector = require('./detectCats.js');
 var preview;
 var photoDisplay;
@@ -96,12 +97,14 @@ function checkForFaces() {
 	stopStreaming();
   speaker.speak("Hmmm... Let me see what the Google Machine thinks...").then(function() {
   	analyze.AnalyzeImage(streamFile).then(info => {
-  		startPhotoDisplay();
-  		console.dir(info);
-  		emotion.detect(info).then(emotions => {
-  			speaker.speak(emotions.text);
-  			console.dir(emotions);
-  		});
+      drawBox.drawFaceBoxes(info,streamFile,streamFile).then(function(count) {
+    		startPhotoDisplay();
+    		console.dir(info);
+    		emotion.detect(info).then(emotions => {
+    			speaker.speak(emotions.text);
+    			console.dir(emotions);
+    		});
+      })
     })
   })
 }
