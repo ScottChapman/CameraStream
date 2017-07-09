@@ -6,7 +6,7 @@ var cats = ['cat','cats','kitten','kittens','feline'];
 function ContainsCats(info) {
 	return new Promise(function(resolve,reject) {
 		resolve(_.intersection(_.words(info.labels.join(' ')),cats).length > 0);
-	}
+	});
 }
 
 /*

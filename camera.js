@@ -97,7 +97,7 @@ function checkForFaces() {
 	stopStreaming();
   speaker.speak("Hmmm... Let me see what the Google Machine thinks...").then(function() {
   	analyze.AnalyzeImage(streamFile).then(info => {
-      drawBox.drawFaceBoxes(info,streamFile,streamFile).then(function(count) {
+      faceBoxes.drawFaceBoxes(info,streamFile,streamFile).then(function(count) {
     		startPhotoDisplay();
     		console.dir(info);
     		emotion.detect(info).then(emotions => {

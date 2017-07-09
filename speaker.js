@@ -9,13 +9,6 @@ const Polly = new AWS.Polly({
     region: 'us-east-1'
 })
 
-// Create the Speaker instance
-const Player = new Speaker({
-  channels: 1,
-  bitDepth: 16,
-  sampleRate: 16000
-})
-
 
 function speak(text) {
   let params = {
@@ -25,6 +18,13 @@ function speak(text) {
   }
   return new Promise(function(resolve,reject) {
     Polly.synthesizeSpeech(params, (err, data) => {
+	// Create the Speaker instance
+	const Player = new Speaker({
+	  channels: 1,
+	  bitDepth: 16,
+	  sampleRate: 16000
+	})
+
       if (err)
         reject(err);
       if (data) {
